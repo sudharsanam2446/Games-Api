@@ -166,11 +166,11 @@ components:
         - name
       description: List of Gamers
       properties:
-        gamers_credit_id:
+        gamers_credits_id:
           type: integer
         credits:
           type: integer
-        game_id:
+        games_id:
           type: string
         email:
           type: string

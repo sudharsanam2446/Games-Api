@@ -20,7 +20,7 @@ CREATE TABLE t_gamers (
 DROP TABLE IF EXISTS t_gamers_credits;
 
 CREATE TABLE t_gamers_credits (
-  gamers_credit_id INT AUTO_INCREMENT PRIMARY KEY,
+  gamers_credits_id INT AUTO_INCREMENT PRIMARY KEY,
   level VARCHAR(250) check(level in ('NOOB', 'PRO', 'INVINSIBLE') ),
   credits NUMERIC NOT NULL DEFAULT 0,
   games_id INT,
