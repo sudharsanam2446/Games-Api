@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS t_games;
+ 
+CREATE TABLE t_games (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  name VARCHAR(250) NOT NULL,
+  description VARCHAR(500)
+);
+
+DROP TABLE IF EXISTS t_gamers;
+
+CREATE TABLE t_gamers (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(250) NOT NULL,
+  nick_name VARCHAR(250) ,
+  gender VARCHAR(250) check(gender in ('FEMALE', 'MALE', 'TRANS', 'PERSONAL') ),
+  email VARCHAR(250) PRIMARY KEY,
+  geo VARCHAR(25) check(geo in ('EUROPE', 'ASIA', 'NORTH_AMERICA', 'SOUTH_AMERICA', 'AFRICA', 'AUSTRALIA', 'ANTARTICA') )
+);

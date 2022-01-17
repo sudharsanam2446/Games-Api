@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: My Invitation Api
+  version: 1.0.0
+tags:
+  - name: Invitation Api
+    description: My Invitation Api
+paths:
+  /games:
+    post:
+      tags:
+        - manage games
+      description: manage games
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameInfo'
+      responses:
+        201:
+          description: Game created
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Request validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /gamers:
+    post:
+      tags:
+        - manage gamers
+      description: manage gamers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GamersInfo'
+      responses:
+        200:
+          description: success, added gamers
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Request validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+
+components:
+  parameters:
+    Authorization:
+      in: header
+      name: Authorization
+      description: Bearer token
+      required: true
+      schema:
+        type: string
+        default: 'Bearer <token>'
+  securitySchemes:
+    apikey_mine:
+      type: apiKey
+      in: header
+      name: X-METADATA-KEY
+
+
+  schemas:
+    GameInfo:
+      type: object
+      required:
+        - name
+      description: List of Games
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+
+    GamersInfo:
+      type: object
+      required:
+        - name
+      description: List of Gamers
+      properties:
+        name:
+          type: string
+        nickname:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+          enum:
+            - FEMALE
+            - MALE
+            - TRANS
+            - PERSONAL
+        geo:
+          type: string
+          enum:
+            - EUROPE
+            - ASIA
+            - NORTH_AMERICA
+            - SOUTH_AMERICA
+            - AFRICA
+            - AUSTRALIA
+            - ANTARTICA
+
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        causes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+
+
+
+
+

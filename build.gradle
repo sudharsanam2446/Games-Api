@@ -1,0 +1,127 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'application'
+	id 'idea'
+	id 'jacoco'
+	id 'org.openapi.generator' version "5.3.1"
+}
+
+group = 'com.bs.codetest'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '8'
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+			srcDir "$buildDir/generated/openapi/src/main/java"
+		}
+		resources {
+			srcDir "src/main/resources"
+			srcDir "$buildDir/generated/openapi-docs"
+		}
+	}
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	//implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	//implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	implementation group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
+	implementation group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
+	//implementation group: 'org.codehaus.janino', name: 'janino', version: '3.0.12'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.3'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	implementation group: 'org.openapitools', name: 'jackson-databind-nullable', version: '0.2.1'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	runtimeOnly 'com.h2database:h2'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.2.0'
+
+}
+
+def watchForChange = 'src/**/*'
+def doOnChange = './gradlew classes'
+
+mainClassName = 'com.bs.codetest.api.CodetestApiInvoker'
+
+run {
+	args = ["--redeploy=$watchForChange", "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange"]
+}
+
+openApiGenerate {
+	mkdir("$buildDir/generated/openapi")
+	generatorName = 'spring'
+	inputSpec = "$rootDir/src/main/resources/openapi.yml".toString()
+	outputDir = "$buildDir/generated/openapi".toString()
+	apiPackage = "com.bs.codetest.api"
+	modelPackage = "com.bs.codetest.api.model"
+	ignoreFileOverride = "$rootDir/src/main/resources/.openapi-generator-ignore".toString()
+	configOptions = [
+			dateLibrary: "java8",
+			java8      : 'true',
+			serializableModel: 'true'
+	]
+	additionalProperties = [
+			useTags: 'true'
+	]
+}
+
+bootJar {
+	exclude('application.properties')
+}
+
+
+compileJava.dependsOn tasks.openApiGenerate
+
+jacoco {
+	toolVersion = "0.8.3"
+}
+
+jacocoTestReport {
+	reports {
+		html.enabled = true
+	}
+
+	afterEvaluate {
+		classDirectories.from = files(classDirectories.files.collect {
+			fileTree(dir: it,
+					include: ['com/bs/codetest/api/**'], exclude: [])
+		})
+	}
+}
+build.dependsOn jacocoTestReport
+
+task generateOpenApiDoc(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+	doFirst {
+		mkdir("$buildDir/generated/openapi-docs/static/docs")
+	}
+	generatorName = 'html'
+	inputSpec = "$rootDir/src/main/resources/openapi.yml".toString()
+	outputDir = "$buildDir/generated/openapi-docs/static/docs".toString()
+	apiPackage = "com.something.codetest.somedomain.api"
+	modelPackage = "com.something.codetest.somedomain.api.model"
+}
+compileJava.dependsOn tasks.generateOpenApiDoc
+
+
+build.dependsOn jacocoTestReport
+
+
+test {
+	useJUnitPlatform()
+}
