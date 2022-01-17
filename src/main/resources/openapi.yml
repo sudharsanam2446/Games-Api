@@ -65,6 +65,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /credits:
+    post:
+      tags:
+        - manage gamers credits
+      description: manage gamers credits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GamersCredits'
+      responses:
+        200:
+          description: success, added gamers credit
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Request validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
 
 components:
@@ -91,6 +121,8 @@ components:
         - name
       description: List of Games
       properties:
+        games_id:
+          type: integer
         name:
           type: string
         description:
@@ -102,6 +134,8 @@ components:
         - name
       description: List of Gamers
       properties:
+        gamers_id:
+          type: integer
         name:
           type: string
         nickname:
@@ -125,6 +159,27 @@ components:
             - AFRICA
             - AUSTRALIA
             - ANTARTICA
+
+    GamersCredits:
+      type: object
+      required:
+        - name
+      description: List of Gamers
+      properties:
+        gamers_credit_id:
+          type: integer
+        credits:
+          type: integer
+        game_id:
+          type: string
+        email:
+          type: string
+        level:
+          type: string
+          oneOf:
+            - NOOB
+            - PRO
+            - INVINSIBLE
 
 
     Error:
