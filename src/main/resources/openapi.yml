@@ -163,7 +163,10 @@ components:
     GamersCredits:
       type: object
       required:
-        - name
+        - games_id
+        - email
+        - level
+        - credits
       description: List of Gamers
       properties:
         gamers_credits_id:
