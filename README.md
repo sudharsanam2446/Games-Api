@@ -11,6 +11,11 @@
 * Run the cmd "gradle clean build". It will generate the APIs and the swagger documentations based on the contract defined in "src/main/resources/openapi.yml"
 * Hit http://localhost:8080/games/swagger-ui/index.html to access the swagger page and play with it.
 * H2 DB can be accessed using, http://localhost:8080/games/h2-console/
+  * url: jdbc:h2:mem:mydb
+  * username: sa
+  * password: password
+  * driverClassName: org.h2.Driver
+  
 
 ### Improvements
 
