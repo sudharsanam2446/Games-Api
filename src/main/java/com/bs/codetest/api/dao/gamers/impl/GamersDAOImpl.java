@@ -27,9 +27,9 @@ public class GamersDAOImpl implements GamersDAO {
         Map<String, Object> insertGamersParams = new HashMap<>();
         insertGamersParams.put("name", gamersInfo.getName());
         insertGamersParams.put("nickName", gamersInfo.getNickname());
-        insertGamersParams.put("gender", gamersInfo.getGender().getValue());
+        insertGamersParams.put("gender", gamersInfo.getGender());
         insertGamersParams.put("email", gamersInfo.getEmail());
-        insertGamersParams.put("geo", gamersInfo.getGeo().getValue());
+        insertGamersParams.put("geo", gamersInfo.getGeo());
         namedParameterJdbcTemplate.update(INSERT_GAMERS_INFO_QUERY, insertGamersParams);
         return gamersInfo;
     }

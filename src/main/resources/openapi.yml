@@ -110,14 +110,14 @@ components:
           type: string
         gender:
           type: string
-          enum:
+          oneOf:
             - FEMALE
             - MALE
             - TRANS
             - PERSONAL
         geo:
           type: string
-          enum:
+          oneOf:
             - EUROPE
             - ASIA
             - NORTH_AMERICA

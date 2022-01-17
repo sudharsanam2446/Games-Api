@@ -47,8 +47,8 @@ public class GamersApiControllerTest {
         gamersInfo.setEmail("sudharsanam.balaji@gmail.com");
         gamersInfo.setName("balaji");
         gamersInfo.setNickname("balaji");
-        gamersInfo.setGender(GamersInfo.GenderEnum.MALE);
-        gamersInfo.setGeo(GamersInfo.GeoEnum.ASIA);
+        gamersInfo.setGender("MALE");
+        gamersInfo.setGeo("ASIA");
         mockMvc.perform(post("/1.0/gamers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(gamersInfo)))

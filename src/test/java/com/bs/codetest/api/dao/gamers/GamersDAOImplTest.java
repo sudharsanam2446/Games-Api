@@ -30,8 +30,8 @@ class GamersDAOImplTest {
         gamersInfo.setEmail("sudharsanam.balaji@gmail.com");
         gamersInfo.setName("balaji");
         gamersInfo.setNickname("balaji");
-        gamersInfo.setGender(GamersInfo.GenderEnum.MALE);
-        gamersInfo.setGeo(GamersInfo.GeoEnum.ASIA);
+        gamersInfo.setGender("MALE");
+        gamersInfo.setGeo("ASIA");
     }
 
     @Test

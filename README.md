@@ -1,5 +1,5 @@
 # Getting Started
-* Design First approach using OpenAPI Contracts Code Gen.
+* API First Design using OpenAPI Contracts Code Gen.
 * Other tech stacks used are SpringBoot, OpenAPI, Gradle, Mockito
 
 ### Prerequisites
