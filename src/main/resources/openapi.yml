@@ -175,7 +175,7 @@ components:
           type: integer
         games_id:
           type: string
-        email:
+        gamers_email:
           type: string
         level:
           type: string

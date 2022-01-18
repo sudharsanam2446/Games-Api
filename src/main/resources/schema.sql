@@ -25,7 +25,7 @@ CREATE TABLE t_gamers_credits (
   credits NUMERIC NOT NULL DEFAULT 0,
   games_id INT,
   foreign key (games_id) references t_games(games_id),
-  email VARCHAR(250),
-  foreign key (email) references t_gamers(email)
+  gamer_email VARCHAR(250),
+  foreign key (gamer_email) references t_gamers(email)
 )
 

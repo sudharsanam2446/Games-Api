@@ -1,6 +1,7 @@
 package com.bs.codetest.api.util;
 
 import com.bs.codetest.api.exception.InvalidRequestBodyException;
+import com.bs.codetest.api.model.GamersCredits;
 import com.bs.codetest.api.model.GamersInfo;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -30,5 +31,10 @@ public class ValidationUtils {
             logger.error("Missing Geo property in the request");
             throw new InvalidRequestBodyException("Missing or Invalid Geo property in the request");
         }
+    }
+
+    public static void validateGamersCreditsRequest(GamersCredits gamersCredits) {
+        //todo:
+
     }
 }
