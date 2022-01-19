@@ -17,10 +17,13 @@ public class GamesServiceImpl implements GamesService {
     GamesDAO gamesDAO;
 
     @Override
+    public GameInfo persistMessage(GameInfo modelClass) {
+        return persistGame(modelClass);
+    }
+
+    @Override
     public GameInfo persistGame(GameInfo gameInfo) {
-        logger.info(gameInfo.toString());
-        gamesDAO.persistGame(gameInfo);
-        return gameInfo;
+        return gamesDAO.persistGame(gameInfo);
     }
 }
 

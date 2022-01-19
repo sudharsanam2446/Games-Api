@@ -16,8 +16,8 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(GamersCreditsDAOImpl.class);
 
-    public static final String INSERT_GAMERS_CREDIT_INFO_QUERY = "INSERT INTO t_gamers_credits (name, nick_name, gender, email, geo) "
-            + "VALUES (:name, :nickName, :gender, :email, :geo)";
+    public static final String INSERT_GAMERS_CREDIT_INFO_QUERY = "INSERT INTO t_gamers_credits (level, credits, games_id, gamer_email) "
+            + "VALUES (:level, :credits, :gamesId, :gamersEmail)";
 
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -27,8 +27,8 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
         Map<String, Object> insertGamersCreditParams = new HashMap<>();
         insertGamersCreditParams.put("level", gamersCreditsInfo.getLevel());
         insertGamersCreditParams.put("credits", gamersCreditsInfo.getCredits());
-        insertGamersCreditParams.put("games_id", gamersCreditsInfo.getGamesId());
-        insertGamersCreditParams.put("gamers_email", gamersCreditsInfo.getGamersEmail());
+        insertGamersCreditParams.put("gamesId", gamersCreditsInfo.getGamesId());
+        insertGamersCreditParams.put("gamersEmail", gamersCreditsInfo.getGamersEmail());
         namedParameterJdbcTemplate.update(INSERT_GAMERS_CREDIT_INFO_QUERY, insertGamersCreditParams);
         return gamersCreditsInfo;
     }

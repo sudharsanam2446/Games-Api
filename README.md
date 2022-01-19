@@ -20,6 +20,7 @@
 ### Improvements
 
 * Improved error handling
+* Implement Retries with Exponential backoff for Recoverable Exceptions 
 * Improve Unit test coverage
 * Split openapi.yml contract
 * Retries with Exponential BackOff

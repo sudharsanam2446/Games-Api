@@ -3,6 +3,7 @@ package com.bs.codetest.api.controller.credits;
 import com.bs.codetest.api.ManageGamersCreditsApi;
 import com.bs.codetest.api.model.GamersCredits;
 import com.bs.codetest.api.model.GamersInfo;
+import com.bs.codetest.api.service.credits.GamersCreditsService;
 import com.bs.codetest.api.service.gamers.GamersService;
 import com.bs.codetest.api.util.ResponseHandler;
 import com.bs.codetest.api.util.ValidationUtils;
@@ -23,7 +24,7 @@ public class GamersCreditsApiController implements ManageGamersCreditsApi {
     private final NativeWebRequest request;
 
     @Autowired
-    private GamersService gamersService;
+    private GamersCreditsService gamersCreditsService;
 
     @Autowired
     public GamersCreditsApiController(NativeWebRequest request) {
@@ -39,8 +40,8 @@ public class GamersCreditsApiController implements ManageGamersCreditsApi {
     @Override
     public ResponseEntity<Object> creditsPost(GamersCredits gamersCredits) {
         ValidationUtils.validateGamersCreditsRequest(gamersCredits);
-        //GamersInfo gamersInfoResponse = gamersService.persistGamers(gamersInfo);
+        GamersCredits gamersCreditsResponse = gamersCreditsService.processEntity(gamersCredits, "GAMERS_CREDIT");
         //todo: add to constants
-        return ResponseHandler.generateResponse("Successfully added a gamer!", HttpStatus.CREATED, gamersCredits);
+        return ResponseHandler.generateResponse("Successfully added a gamer!", HttpStatus.CREATED, gamersCreditsResponse);
     }
 }

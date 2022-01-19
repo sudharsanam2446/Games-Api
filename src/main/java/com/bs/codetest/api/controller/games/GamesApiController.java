@@ -36,7 +36,7 @@ public class GamesApiController implements ManageGamesApi {
     @Override
     public ResponseEntity<Object> gamesPost(GameInfo gameInfo) {
         //todo: add validations
-        GameInfo gameInfoResponse = gamesService.persistGame(gameInfo);
+        GameInfo gameInfoResponse = gamesService.processEntity(gameInfo, "GAMES_INFO");
         return ResponseHandler.generateResponse("Successfully added a game!", HttpStatus.CREATED, gameInfoResponse);
     }
 }

@@ -36,9 +36,9 @@ public class GamersApiController implements ManageGamersApi {
 
     @Override
     public ResponseEntity<Object> gamersPost(GamersInfo gamersInfo) {
-        ValidationUtils.validateGamersRequest(gamersInfo);
-        GamersInfo gamersInfoResponse = gamersService.persistGamers(gamersInfo);
         //todo: add to constants
+        ValidationUtils.validateGamersRequest(gamersInfo);
+        GamersInfo gamersInfoResponse = gamersService.processEntity(gamersInfo, "GAMERS_INFO");
         return ResponseHandler.generateResponse("Successfully added a gamer!", HttpStatus.CREATED, gamersInfoResponse);
     }
 }

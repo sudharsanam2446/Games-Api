@@ -16,12 +16,17 @@ public class GamersCreditsServiceImpl implements GamersCreditsService {
     @Autowired
     GamersCreditsDAO gamersCreditsDAO;
 
+    @Override
+    public GamersCredits persistMessage(GamersCredits modelClass) {
+        return persistCreditInfo(modelClass);
+    }
 
     @Override
     public GamersCredits persistCreditInfo(GamersCredits gamersCredits) {
-        //todo: handle all db exceptions
         return gamersCreditsDAO.persistGamersCredits(gamersCredits);
     }
+
+
 }
 
 
