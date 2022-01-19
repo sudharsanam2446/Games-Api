@@ -29,4 +29,5 @@ public interface BaseServiceDelegateInterface<M> {
     }
 
     M persistMessage(M modelClass);
+
 }

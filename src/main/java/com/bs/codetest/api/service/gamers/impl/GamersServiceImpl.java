@@ -25,6 +25,8 @@ public class GamersServiceImpl implements GamersService {
     public GamersInfo persistGamers(GamersInfo gamersInfo) {
         return gamersDAO.persistGamers(gamersInfo);
     }
+
+
 }
 
 

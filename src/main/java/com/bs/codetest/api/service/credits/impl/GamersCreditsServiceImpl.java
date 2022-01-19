@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GamersCreditsServiceImpl implements GamersCreditsService {
 
@@ -24,6 +27,12 @@ public class GamersCreditsServiceImpl implements GamersCreditsService {
     @Override
     public GamersCredits persistCreditInfo(GamersCredits gamersCredits) {
         return gamersCreditsDAO.persistGamersCredits(gamersCredits);
+    }
+
+    @Override
+    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId, Integer gameId) {
+        //todo: handle sql exceptions or make the get calls generic
+        return gamersCreditsDAO.getGamersMaxCreditByLevel(levelId, gameId);
     }
 
 

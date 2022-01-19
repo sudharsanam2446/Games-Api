@@ -70,6 +70,7 @@ paths:
       tags:
         - manage gamers credits
       description: manage gamers credits
+      summary: manage gamers credits
       requestBody:
         content:
           application/json:
@@ -90,6 +91,41 @@ paths:
                 $ref: '#/components/schemas/Error'
         500:
           description: Request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /credits/level/{levelId}/game/{gameId}::
+    get:
+      tags:
+        - manage gamers credits
+      description: Returns the credit details
+      operationId: getCredits
+      parameters:
+        - in: path
+          name: levelId
+          description: The level enum value
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: gameId
+          description: The game id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: success, maximum credits for each game based on their levels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GamersCredits'
+        default:
+          description: unexpected error
           content:
             application/json:
               schema:
