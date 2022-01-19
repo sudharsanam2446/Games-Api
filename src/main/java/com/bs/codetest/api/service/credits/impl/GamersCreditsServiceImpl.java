@@ -30,9 +30,9 @@ public class GamersCreditsServiceImpl implements GamersCreditsService {
     }
 
     @Override
-    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId, Integer gameId) {
+    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId) {
         //todo: handle sql exceptions or make the get calls generic
-        return gamersCreditsDAO.getGamersMaxCreditByLevel(levelId, gameId);
+        return gamersCreditsDAO.getGamersMaxCreditByLevel(levelId);
     }
 
 

@@ -96,27 +96,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /credits/level/{levelId}/game/{gameId}::
+  /credits/max-credits-by-level:
     get:
       tags:
         - manage gamers credits
-      description: Returns the credit details
+      description: Returns the gamer with max credits for each game, for a given level
       operationId: getCredits
       parameters:
-        - in: path
-          name: levelId
-          description: The level enum value
+        - name: level
+          in: query
+          description: User must pass the Levels One Of ('NOOB', 'PRO', 'INVINSIBLE'). For example the query param will be, &level=INVINSIBLE
           required: true
           schema:
             type: string
-        - in: path
-          name: gameId
-          description: The game id
-          required: true
-          schema:
-            type: integer
       responses:
-        '200':
+        200:
           description: success, maximum credits for each game based on their levels
           content:
             application/json:
@@ -124,6 +118,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GamersCredits'
+        400:
+          description: Request validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         default:
           description: unexpected error
           content:

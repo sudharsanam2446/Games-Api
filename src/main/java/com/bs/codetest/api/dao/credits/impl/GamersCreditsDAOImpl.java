@@ -40,12 +40,12 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
     }
 
     @Override
-    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId, Integer gameId) {
-        List<GamersCredits> gamersCreditsList = null;
-        Map<String, Object> insertGamersCreditParams = new HashMap<>();
-        insertGamersCreditParams.put("level", levelId);
-        gamersCreditsList = namedParameterJdbcTemplate.query(FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY, insertGamersCreditParams, new GamersCreditsMapper());
-        return Optional.ofNullable(gamersCreditsList);
+    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId) {
+        List<GamersCredits> gamersMaxCreditsList = null;
+        Map<String, Object> insertGamersMaxCreditParams = new HashMap<>();
+        insertGamersMaxCreditParams.put("level", levelId);
+        gamersMaxCreditsList = namedParameterJdbcTemplate.query(FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY, insertGamersMaxCreditParams, new GamersCreditsMapper());
+        return Optional.ofNullable(gamersMaxCreditsList);
     }
 
 }

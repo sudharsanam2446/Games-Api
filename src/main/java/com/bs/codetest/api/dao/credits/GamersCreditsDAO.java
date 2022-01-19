@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface GamersCreditsDAO {
     GamersCredits persistGamersCredits(GamersCredits gamersCreditsInfo);
 
-    Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId, Integer gameId);
+    Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId);
 }

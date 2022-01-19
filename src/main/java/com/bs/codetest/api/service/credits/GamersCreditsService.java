@@ -11,7 +11,7 @@ public interface GamersCreditsService extends BaseServiceDelegateInterface<Gamer
 
     GamersCredits persistCreditInfo(GamersCredits gamersCredits);
 
-    Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId, Integer gameId);
+    Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId);
 
 
 }

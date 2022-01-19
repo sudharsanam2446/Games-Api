@@ -17,24 +17,36 @@ public class ValidationUtils {
 
     public static void validateGamersRequest(GamersInfo gamersInfo) {
         //todo: add to constants
-        if(StringUtils.isBlank(gamersInfo.getName())) {
+        if (StringUtils.isBlank(gamersInfo.getName())) {
             logger.error("Missing name property in the request");
             throw new InvalidRequestBodyException("Missing name property in the request");
         }
 
-        if(null != gamersInfo.getGender() && !EnumUtils.isValidEnum(Gender.class, gamersInfo.getGender())) {
+        if (null != gamersInfo.getGender() && !EnumUtils.isValidEnum(Gender.class, gamersInfo.getGender())) {
             logger.error("Missing name property in the request");
             throw new InvalidRequestBodyException("Missing or Invalid Gender property in the request");
         }
 
-        if(null != gamersInfo.getGeo() && !EnumUtils.isValidEnum(Geo.class, gamersInfo.getGeo())) {
+        if (null != gamersInfo.getGeo() && !EnumUtils.isValidEnum(Geo.class, gamersInfo.getGeo())) {
             logger.error("Missing Geo property in the request");
             throw new InvalidRequestBodyException("Missing or Invalid Geo property in the request");
         }
     }
 
-    public static void validateGamersCreditsRequest(GamersCredits gamersCredits) {
-        //todo:
-
+    public static void validateGamersCreditsPostRequest(GamersCredits gamersCreditsl) {
+        //todo
     }
+
+    public static void validateGamersGetMaxCreditsRequest(String level) {
+        if (StringUtils.isBlank(level)) {
+            logger.error("Missing the level property in the queryParam");
+            throw new InvalidRequestBodyException("Missing the level property in the queryParam");
+        }
+        if (!EnumUtils.isValidEnum(Level.class, level)) {
+            logger.error("User must pass the Levels One Of ('NOOB', 'PRO', 'INVINSIBLE') as the query param");
+            throw new InvalidRequestBodyException("User must pass the Levels One Of ('NOOB', 'PRO', 'INVINSIBLE') as the query param");
+        }
+    }
+
+
 }

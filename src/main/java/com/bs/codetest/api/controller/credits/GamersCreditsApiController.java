@@ -38,17 +38,16 @@ public class GamersCreditsApiController implements ManageGamersCreditsApi {
 
     @Override
     public ResponseEntity<Object> creditsPost(GamersCredits gamersCredits) {
-        ValidationUtils.validateGamersCreditsRequest(gamersCredits);
+        ValidationUtils.validateGamersCreditsPostRequest(gamersCredits);
         GamersCredits gamersCreditsResponse = gamersCreditsService.processEntity(gamersCredits, "GAMERS_CREDIT");
         //todo: add to constants
         return ResponseHandler.generateResponse("Successfully added a gamer!", HttpStatus.CREATED, gamersCreditsResponse);
     }
 
     @Override
-    public ResponseEntity<List<GamersCredits>> getCredits(String levelId, Integer gameId) {
-        //todo: implemet validations
-        //ValidationUtils.validateGamersCreditsRequest(gamersCredits);
-        Optional<List<GamersCredits>> gamersCreditsResponse = gamersCreditsService.getGamersMaxCreditByLevel(levelId, gameId);
+    public ResponseEntity<List<GamersCredits>> getCredits(String level) {
+        ValidationUtils.validateGamersGetMaxCreditsRequest(level);
+        Optional<List<GamersCredits>> gamersCreditsResponse = gamersCreditsService.getGamersMaxCreditByLevel(level);
         return new ResponseEntity<List<GamersCredits>>(gamersCreditsResponse.get(), HttpStatus.OK);
     }
 }
