@@ -22,10 +22,9 @@
 * Improved error handling
 * Implement Retries with Exponential backoff for Recoverable Exceptions 
 * Improve Unit test coverage
-* Split openapi.yml contract
-* Retries with Exponential BackOff
+* Split openapi.yml contract into multiple files
 * Implement Redis Cache
 * Add Integration Tests 
-* Consider the proposed microservices architeture - Coming Soon!
+* Consider the proposed microservices architecture (refer src/main/resources/proposed_architecture)
 
 
