@@ -21,7 +21,7 @@ INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 
 INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 'nihana@gmail.com', 300, 'PRO');
 INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 'shivanya@gmail.com', 100, 'PRO');
 
--- Game_Id 1, Nihana is the winner at PRO level
+-- Game_Id 1, Nihana is the winner at INVINSIBLE level
 INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 'balaji@gmail.com', 500, 'INVINSIBLE');
 INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 'nihana@gmail.com', 700, 'INVINSIBLE');
 INSERT INTO t_gamers_credits (games_id, gamer_email, credits, level) VALUES (1, 'shivanya@gmail.com', 100, 'INVINSIBLE');

@@ -22,8 +22,15 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
     public static final String INSERT_GAMERS_CREDIT_INFO_QUERY = "INSERT INTO t_gamers_credits (level, credits, games_id, gamer_email) "
             + "VALUES (:level, :credits, :gamesId, :gamersEmail)";
 
-    public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY  = "SELECT gamers_credits_id, games_id, gamer_email, credits, level FROM t_gamers_credits "
-    + " where (games_id,credits) in (select games_id, max(credits) from t_gamers_credits group by games_id) and level = (:level) ";
+    /*public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY  = "SELECT gamers_credits_id, games_id, gamer_email, credits, level FROM t_gamers_credits "
+    + " where (games_id,credits) in (select games_id, max(credits) from t_gamers_credits group by games_id) and level = (:level) ";*/
+
+    public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY  = "SELECT t.gamers_credits_id, t.games_id,t.gamer_email,t.credits, t.level FROM "
+            + "      (SELECT MAX(credits) AS credits, games_id FROM t_gamers_credits where level = (:level) GROUP BY games_id) AS tempInner "
+            + "    Inner Join t_gamers_credits t ON tempInner.games_id=t.games_id "
+            + "    and tempInner.credits=t.credits "
+            + "    where level = (:level) "
+            + "    ORDER BY t.games_id DESC";
 
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
