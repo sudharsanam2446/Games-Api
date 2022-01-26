@@ -1,6 +1,8 @@
 package com.bs.codetest.api.service.gamers.impl;
 
 import com.bs.codetest.api.dao.gamers.GamersDAO;
+import com.bs.codetest.api.exception.NonRecoverableException;
+import com.bs.codetest.api.exception.RecoverableException;
 import com.bs.codetest.api.model.GamersInfo;
 import com.bs.codetest.api.service.gamers.GamersService;
 import org.slf4j.Logger;
@@ -17,13 +19,14 @@ public class GamersServiceImpl implements GamersService {
     GamersDAO gamersDAO;
 
     @Override
-    public GamersInfo persistMessage(GamersInfo modelClass) {
-        return persistGamers(modelClass);
+    public GamersInfo persistGamers(GamersInfo gamersInfo) {
+        return gamersDAO.processEntity(gamersInfo, "GAMERS_INFO");
     }
 
     @Override
-    public GamersInfo persistGamers(GamersInfo gamersInfo) {
-        return gamersDAO.persistGamers(gamersInfo);
+    public GamersInfo recoveryHook(RecoverableException e, GamersInfo gamersInfo) {
+        logger.error("Retries exhausted for GamersCredits entity with email {} ", gamersInfo.getEmail());
+        throw new NonRecoverableException("Retries exhausted for this transaction", e.getCause());
     }
 
 

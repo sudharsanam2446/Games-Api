@@ -1,6 +1,8 @@
 package com.bs.codetest.api.service.games.impl;
 
 import com.bs.codetest.api.dao.games.GamesDAO;
+import com.bs.codetest.api.exception.NonRecoverableException;
+import com.bs.codetest.api.exception.RecoverableException;
 import com.bs.codetest.api.model.GameInfo;
 import com.bs.codetest.api.service.games.GamesService;
 import org.slf4j.Logger;
@@ -17,13 +19,14 @@ public class GamesServiceImpl implements GamesService {
     GamesDAO gamesDAO;
 
     @Override
-    public GameInfo persistMessage(GameInfo modelClass) {
-        return persistGame(modelClass);
+    public GameInfo persistGame(GameInfo gameInfo) {
+        return gamesDAO.persistGame(gameInfo);
     }
 
     @Override
-    public GameInfo persistGame(GameInfo gameInfo) {
-        return gamesDAO.persistGame(gameInfo);
+    public GameInfo recoveryHook(RecoverableException e, GameInfo gameInfo) {
+        logger.error("Retries exhausted for gameInfo entity with name {} ", gameInfo.getName());
+        throw new NonRecoverableException("Retries exhausted for this transaction", e.getCause());
     }
 }
 

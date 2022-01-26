@@ -1,6 +1,7 @@
 package com.bs.codetest.api.dao.gamers.impl;
 
 import com.bs.codetest.api.dao.gamers.GamersDAO;
+import com.bs.codetest.api.model.GamersCredits;
 import com.bs.codetest.api.model.GamersInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,11 @@ public class GamersDAOImpl implements GamersDAO {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public GamersInfo persistMessage(GamersInfo modelClass) {
+        return persistGamers(modelClass);
+    }
+
+    @Override
     public GamersInfo persistGamers(GamersInfo gamersInfo) {
         Map<String, Object> insertGamersParams = new HashMap<>();
         insertGamersParams.put("name", gamersInfo.getName());
@@ -33,4 +39,6 @@ public class GamersDAOImpl implements GamersDAO {
         namedParameterJdbcTemplate.update(INSERT_GAMERS_INFO_QUERY, insertGamersParams);
         return gamersInfo;
     }
+
+
 }

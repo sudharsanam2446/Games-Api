@@ -44,14 +44,13 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
 
     @Override
     public GamersCredits persistGamersCredits(GamersCredits gamersCreditsInfo) {
-        throw new RecoverableException("Connection to the database failed, while processing the event. No worries it will be retried !");
-        /*Map<String, Object> insertGamersCreditParams = new HashMap<>();
+        Map<String, Object> insertGamersCreditParams = new HashMap<>();
         insertGamersCreditParams.put("level", gamersCreditsInfo.getLevel());
         insertGamersCreditParams.put("credits", gamersCreditsInfo.getCredits());
         insertGamersCreditParams.put("gamesId", gamersCreditsInfo.getGamesId());
         insertGamersCreditParams.put("gamersEmail", gamersCreditsInfo.getGamersEmail());
         namedParameterJdbcTemplate.update(INSERT_GAMERS_CREDIT_INFO_QUERY, insertGamersCreditParams);
-        return gamersCreditsInfo;*/
+        return gamersCreditsInfo;
     }
 
     @Override
