@@ -4,11 +4,7 @@ package com.bs.codetest.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.backoff.FixedBackOffPolicy;
-import org.springframework.retry.policy.SimpleRetryPolicy;
-import org.springframework.retry.support.RetryTemplate;
 
 @SpringBootApplication
 @EnableRetry
@@ -20,7 +16,7 @@ public class CodetestApiInvoker {
         new SpringApplication(CodetestApiInvoker.class).run(args);
     }
 
-    @Bean
+    /*@Bean
     public RetryTemplate retryTemplate()
     {
         RetryTemplate retryTemplate = new RetryTemplate();
@@ -34,6 +30,6 @@ public class CodetestApiInvoker {
         retryTemplate.setRetryPolicy(simpleRetryPolicy);
         retryTemplate.setBackOffPolicy(backOffPolicy);
         return retryTemplate;
-    }
+    }*/
 
 }
