@@ -39,7 +39,7 @@ public class GamersCreditsApiController implements ManageGamersCreditsApi {
     @Override
     public ResponseEntity<Object> creditsPost(GamersCredits gamersCredits) {
         ValidationUtils.validateGamersCreditsPostRequest(gamersCredits);
-        GamersCredits gamersCreditsResponse = gamersCreditsService.processEntity(gamersCredits, "GAMERS_CREDIT");
+        GamersCredits gamersCreditsResponse = gamersCreditsService.persistCreditInfo(gamersCredits);
         //todo: add to constants
         return ResponseHandler.generateResponse("Successfully added a gamer!", HttpStatus.CREATED, gamersCreditsResponse);
     }

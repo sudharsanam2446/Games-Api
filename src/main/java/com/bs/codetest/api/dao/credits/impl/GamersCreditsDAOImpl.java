@@ -1,6 +1,7 @@
 package com.bs.codetest.api.dao.credits.impl;
 
 import com.bs.codetest.api.dao.credits.GamersCreditsDAO;
+import com.bs.codetest.api.exception.RecoverableException;
 import com.bs.codetest.api.model.GamersCredits;
 import com.bs.codetest.api.util.mappers.GamersCreditsMapper;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
     /*public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY  = "SELECT gamers_credits_id, games_id, gamer_email, credits, level FROM t_gamers_credits "
     + " where (games_id,credits) in (select games_id, max(credits) from t_gamers_credits group by games_id) and level = (:level) ";*/
 
-    public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY  = "SELECT t.gamers_credits_id, t.games_id,t.gamer_email,t.credits, t.level FROM "
+    public static final String FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY = "SELECT t.gamers_credits_id, t.games_id,t.gamer_email,t.credits, t.level FROM "
             + "      (SELECT MAX(credits) AS credits, games_id FROM t_gamers_credits where level = (:level) GROUP BY games_id) AS tempInner "
             + "    Inner Join t_gamers_credits t ON tempInner.games_id=t.games_id "
             + "    and tempInner.credits=t.credits "
@@ -36,23 +37,31 @@ public class GamersCreditsDAOImpl implements GamersCreditsDAO {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public GamersCredits persistMessage(GamersCredits modelClass) {
+        return persistGamersCredits(modelClass);
+    }
+
+
+    @Override
     public GamersCredits persistGamersCredits(GamersCredits gamersCreditsInfo) {
-        Map<String, Object> insertGamersCreditParams = new HashMap<>();
+        throw new RecoverableException("Connection to the database failed, while processing the event. No worries it will be retried !");
+        /*Map<String, Object> insertGamersCreditParams = new HashMap<>();
         insertGamersCreditParams.put("level", gamersCreditsInfo.getLevel());
         insertGamersCreditParams.put("credits", gamersCreditsInfo.getCredits());
         insertGamersCreditParams.put("gamesId", gamersCreditsInfo.getGamesId());
         insertGamersCreditParams.put("gamersEmail", gamersCreditsInfo.getGamersEmail());
         namedParameterJdbcTemplate.update(INSERT_GAMERS_CREDIT_INFO_QUERY, insertGamersCreditParams);
-        return gamersCreditsInfo;
+        return gamersCreditsInfo;*/
     }
 
     @Override
-    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId) {
+    public Optional<List<GamersCredits>> getGamersMaxCreditByLevel(String levelId) throws RecoverableException {
         List<GamersCredits> gamersMaxCreditsList = null;
         Map<String, Object> insertGamersMaxCreditParams = new HashMap<>();
         insertGamersMaxCreditParams.put("level", levelId);
         gamersMaxCreditsList = namedParameterJdbcTemplate.query(FETCH_GAMERS_MAX_CREDIT_BY_LEVEL_QUERY, insertGamersMaxCreditParams, new GamersCreditsMapper());
         return Optional.ofNullable(gamersMaxCreditsList);
     }
+
 
 }
