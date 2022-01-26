@@ -2,7 +2,6 @@ package com.bs.codetest.api.dao.games.impl;
 
 import com.bs.codetest.api.dao.games.GamesDAO;
 import com.bs.codetest.api.model.GameInfo;
-import com.bs.codetest.api.model.GamersCredits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class GamesDAOImpl implements GamesDAO {
     private static final Logger logger = LoggerFactory.getLogger(GamesDAOImpl.class);
 
     public static final String INSERT_GAMEINFO_QUERY = "INSERT INTO t_games (name, description) "
-    + "VALUES (:name, :description)";
+            + "VALUES (:name, :description)";
 
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;

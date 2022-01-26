@@ -20,7 +20,7 @@ public class GamesServiceImpl implements GamesService {
 
     @Override
     public GameInfo persistGame(GameInfo gameInfo) {
-        return gamesDAO.persistGame(gameInfo);
+        return gamesDAO.processEntity(gameInfo, "GAMERS_INFO");
     }
 
     @Override
